@@ -19,7 +19,10 @@ const Banner = () => {
     const navItems = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/about'}>About</Link></li>
-        {user?.email ? <li><button onClick={handleLogout}>LogOut</button></li> :
+        {user?.email ? <><li><Link to={'/bookings'}>My Booking</Link></li>
+            <li><button onClick={handleLogout}>LogOut</button></li>
+        </>
+            :
             <li><Link to={'/login'}>Login</Link></li>}
     </>
 
