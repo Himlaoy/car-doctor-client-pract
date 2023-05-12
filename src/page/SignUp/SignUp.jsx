@@ -14,7 +14,7 @@ const SignUp = () => {
         const name = form.name.value
         const email = form.email.value
         const password = form.password.value
-        console.log(email, password)
+        // console.log(email, password)
 
         createUser(email, password)
         .then(result =>{
@@ -46,13 +46,13 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="text" name='email' placeholder="email" className="input input-bordered" />
+                                <input type="email" required name='email' placeholder="email" className="input input-bordered" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Password</span>
                                 </label>
-                                <input type="text" name='password' placeholder="password" className="input input-bordered" />
+                                <input type="password" required name='password' placeholder="password" className="input input-bordered" />
                                 <label className="label">
                                     <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                 </label>

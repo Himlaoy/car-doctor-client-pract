@@ -1,12 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { data } from 'autoprefixer';
 
 const Checkout = () => {
-    const service = useLoaderData()
-    const { title, service_id, price, } = service
+    const {user} = useContext(AuthContext)
 
-    const handleSubmit =()=>{
-        console.log('ok ')
+    const service = useLoaderData()
+    const { title, service_id, price,_id ,img} = service
+    console.log(service)
+
+    const handleSubmit =(event)=>{
+        event.preventDefault()
+        const form = event.target
+        const name = form.name.value
+        const date= form.date.value
+        const email = form.email.value
+
+        const order = {
+            customerName:name,
+            email,
+            price:price,
+            date,
+            img,
+            title,
+            service:_id
+
+        }
+
+        fetch(`http://localhost:5000/services/${_id}`,{
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body:JSON.stringify(order)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data)
+        })
+       
     }
 
 
@@ -20,28 +53,28 @@ const Checkout = () => {
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Email</span>
+                                <span className="label-text">Name</span>
                             </label>
-                            <input type="text" placeholder="email" className="input input-bordered" />
+                            <input type="text" defaultValue={user?.displayName} name='name' className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text">Date</span>
                             </label>
-                            <input type="text" placeholder="password" className="input input-bordered" />
+                            <input type="date" placeholder="date" name='date' className="input input-bordered" />
 
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input type="text" placeholder="email" className="input input-bordered" />
+                            <input type="email" defaultValue={user?.email} name='email' className="input input-bordered" />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Password</span>
+                                <span className="label-text">Dew amount</span>
                             </label>
-                            <input type="text" placeholder="password" className="input input-bordered" />
+                            <input type="text" defaultValue={price} name='amount' className="input input-bordered" />
                         </div>
                     </div>
                     <div className="form-control mt-6">
