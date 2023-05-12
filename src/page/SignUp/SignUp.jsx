@@ -3,7 +3,7 @@ import logo from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 
 const SignUp = () => {
-    const handleSubmit = (event) => {
+    const handleSubmitSignUp = (event) => {
         event.preventDefault()
         const form = event.target
         const email = form.email.value
@@ -19,9 +19,9 @@ const SignUp = () => {
                     <img src={logo} alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl ml-6 bg-base-100">
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmitSignUp}>
                         <div className="card-body">
-                            <h1 className="text-5xl font-bold">Login</h1>
+                            <h1 className="text-5xl text-center font-bold">Sign Up</h1>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Email</span>
