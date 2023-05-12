@@ -6,33 +6,36 @@ import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWith
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 
-const AuthProvider = ({children}) => {
-    const [user , setUser] = useState(null)
+const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
 
-    const createUser =(email, password)=>{
+    const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    const loginUser = (email, password)=>{
-        return signInWithEmailAndPassword(auth, email,password)
+    const loginUser = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const logOut =()=>{
+    const logOut = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
-    useEffect(()=>{
-        const   unSubscribe = onAuthStateChanged(auth, currentUser=>{
-                console.log('ei holo current user', currentUser)
-                setUser(currentUser)
-                setLoading(false)
-            })
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser)
+            console.log('ei holo current user', currentUser)
+            setLoading(false)
+        })
 
-            return ()=>{
-                return unSubscribe()
-            }
-    },[])
+        return () => {
+            return unSubscribe()
+        }
+    }, [])
 
     const userInfo = {
         user,
