@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../firebase/firebase.config';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 
 export const AuthContext = createContext(null)
@@ -18,9 +18,15 @@ const AuthProvider = ({children}) => {
         return signInWithEmailAndPassword(auth, email,password)
     }
 
+    const logOut =()=>{
+        return signOut(auth)
+    }
+
     useEffect(()=>{
         const   unSubscribe = onAuthStateChanged(auth, currentUser=>{
                 console.log('ei holo current user', currentUser)
+                setUser(currentUser)
+                setLoading(false)
             })
 
             return ()=>{
@@ -32,6 +38,7 @@ const AuthProvider = ({children}) => {
         user,
         createUser,
         loginUser,
+        logOut,
     }
 
     return (

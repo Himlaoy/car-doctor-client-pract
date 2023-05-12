@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
-import { data } from 'autoprefixer';
+import Swal from 'sweetalert2'
 
 const Checkout = () => {
     const {user} = useContext(AuthContext)
@@ -27,8 +27,9 @@ const Checkout = () => {
             service:_id
 
         }
+        console.log(order)
 
-        fetch(`http://localhost:5000/services/${_id}`,{
+        fetch(`http://localhost:5000/bookings/`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"
@@ -38,6 +39,14 @@ const Checkout = () => {
         .then(res=>res.json())
         .then(data=>{
             console.log(data)
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Do you want to continue',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                  })
+            }
         })
        
     }
