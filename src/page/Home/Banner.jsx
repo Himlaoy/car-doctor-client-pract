@@ -12,7 +12,7 @@ const Banner = () => {
     </>
 
     return (
-        <div className="navbar rounded bg-slate-200 mb-6">
+        <div className="navbar rounded bg-slate-200 ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">

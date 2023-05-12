@@ -2,8 +2,7 @@ import React from 'react';
 import logo from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 
-const Login = () => {
-
+const SignUp = () => {
     const handleSubmit = (event) => {
         event.preventDefault()
         const form = event.target
@@ -44,11 +43,11 @@ const Login = () => {
                             </div>
                         </div>
                     </form>
-                    <p className='text-center mb-5'>New to car doctor? please <Link className='text-purple-400' to={'/signUp'}>SignUp</Link></p>
+                    <p className='text-center mb-5'>New to car doctor? please <Link className='text-purple-400' to={'/login'}>Login</Link></p>
                 </div>
             </div>
         </div>
     );
 };
 
-export default Login;
+export default SignUp;
