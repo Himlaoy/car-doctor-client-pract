@@ -24,6 +24,12 @@ const SignUp = () => {
                             <h1 className="text-5xl text-center font-bold">Sign Up</h1>
                             <div className="form-control">
                                 <label className="label">
+                                    <span className="label-text">Name</span>
+                                </label>
+                                <input type="text" name='name' placeholder="name" className="input input-bordered" />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
                                 <input type="text" name='email' placeholder="email" className="input input-bordered" />
