@@ -1,12 +1,11 @@
 
-import { data } from 'autoprefixer';
 import React from 'react';
 import Swal from 'sweetalert2';
 
 const BookingRow = ({ booking, bookings, setBookings }) => {
 
     const { customerName, service, img, title, _id, price, email, status } = booking
-    console.log(booking)
+    // console.log(booking)
 
 
     const handleDelete = (id) => {
@@ -54,7 +53,7 @@ const BookingRow = ({ booking, bookings, setBookings }) => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
+            // console.log(data)
             if(data.modifiedCount>0){
                 const remaining = bookings.filter(book=>book._id !== id)
                 const updateBook = bookings.find(book=>book._id === id)
