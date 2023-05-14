@@ -20,6 +20,7 @@ const SignUp = () => {
         .then(result =>{
             const Logger = result.user
             console.log(Logger)
+            localStorage.removeItem('car-user')
         })
         .catch(error=>console.log(error.message))
 

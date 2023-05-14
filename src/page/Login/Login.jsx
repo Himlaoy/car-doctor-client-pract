@@ -34,7 +34,10 @@ const Login = () => {
                 body:JSON.stringify(loggedUse)
             })
             .then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data=>{
+                console.log('jwt token', data)
+                localStorage.setItem('car-user', data.token)
+            })
             navigate(from, {replace:true})
         })
         .catch(error=>console.log(error.message))
