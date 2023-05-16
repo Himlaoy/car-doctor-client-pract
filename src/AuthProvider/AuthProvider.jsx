@@ -26,7 +26,8 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     }
 
-    const gProvider = ()=>{
+    const gProvider = () => {
+        setLoading(true)
         return signInWithPopup(auth, GProvider)
     }
 
@@ -35,6 +36,26 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser)
             console.log('ei holo current user', currentUser)
             setLoading(false)
+            if (currentUser && currentUser.email) {
+                const loggedUse = {
+                    email: currentUser.email
+                }
+                fetch('https://car-doctor-server-69.vercel.app/jwt', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(loggedUse)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('car-user', data.token)
+                        console.log('jwt token', data.token)
+                    })
+            }
+            else{
+                localStorage.removeItem('car-user')
+            }
         })
 
         return () => {

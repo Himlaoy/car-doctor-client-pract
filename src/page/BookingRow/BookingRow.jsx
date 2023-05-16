@@ -21,7 +21,7 @@ const BookingRow = ({ booking, bookings, setBookings }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/bookings/${id}`, {
+                fetch(`https://car-doctor-server-69.vercel.app/bookings/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())
@@ -44,7 +44,7 @@ const BookingRow = ({ booking, bookings, setBookings }) => {
     }
 
     const handleUpdate =(id)=>{
-        fetch(`http://localhost:5000/bookings/${id}`,{
+        fetch(`https://car-doctor-server-69.vercel.app/bookings/${id}`,{
             method:"PATCH",
             headers:{
                 "content-type": "application/json"

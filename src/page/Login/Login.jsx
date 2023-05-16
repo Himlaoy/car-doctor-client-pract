@@ -24,21 +24,7 @@ const Login = () => {
                 const loggedUser = result.user
                 console.log(loggedUser)
 
-                const loggedUse = {
-                    email: loggedUser.email
-                }
-                fetch('http://localhost:5000/jwt', {
-                    method: "POST",
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify(loggedUse)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        localStorage.setItem('car-user', data.token)
-                        console.log('jwt token', data.token)
-                    })
+                
                 navigate(from, { replace: true })
             })
             .catch(error => console.log(error.message))
