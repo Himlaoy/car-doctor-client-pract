@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import logo from '../../assets/images/login/login.svg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import SocialLogin from '../../shared/SocialLogin/SocialLogin';
 
 const Login = () => {
 
-    const {loginUser} = useContext(AuthContext)
+    const { loginUser } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
     console.log(location)
@@ -16,31 +17,31 @@ const Login = () => {
         const form = event.target
         const email = form.email.value
         const password = form.password.value
-        console.log(email, password)
+        // console.log(email, password)
 
         loginUser(email, password)
-        .then(result=>{
-            const loggedUser = result.user
-            console.log(loggedUser)
+            .then(result => {
+                const loggedUser = result.user
+                console.log(loggedUser)
 
-            const loggedUse = {
-                email:loggedUser.email
-            }
-            fetch('http://localhost:5000/jwt',{
-                method:"POST",
-                headers:{
-                    "content-type":"application/json"
-                },
-                body:JSON.stringify(loggedUse)
+                const loggedUse = {
+                    email: loggedUser.email
+                }
+                fetch('http://localhost:5000/jwt', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(loggedUse)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('car-user', data.token)
+                        console.log('jwt token', data.token)
+                    })
+                navigate(from, { replace: true })
             })
-            .then(res=>res.json())
-            .then(data=>{
-                console.log('jwt token', data)
-                localStorage.setItem('car-user', data.token)
-            })
-            navigate(from, {replace:true})
-        })
-        .catch(error=>console.log(error.message))
+            .catch(error => console.log(error.message))
 
 
 
@@ -79,6 +80,7 @@ const Login = () => {
                         </div>
                     </form>
                     <p className='text-center mb-5'>New to car doctor? please <Link className='text-purple-400' to={'/signUp'}>SignUp</Link></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
